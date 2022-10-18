@@ -22,5 +22,10 @@ class ClienteView {
         $this->smarty->display('edit_cliente.tpl');
     }   
 
+    public function deleteCliente($id){
+        $this->smarty->assign('id', $id);
+        $this->smarty->display('errorDelete.tpl');
+    }
+
 }
 ?>

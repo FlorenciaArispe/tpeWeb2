@@ -2,16 +2,19 @@
 require_once './app/models/cliente.model.php';
 require_once './app/views/cliente.view.php';
 require_once './app/helpers/auth.Helper.php';
+require_once './app/models/producto.model.php';
 
 class ClienteController {
 
     private $model;
     private $view;
     private $authHelper;
-    
+    private $modelProducto;
+
     public function __construct () {
         $this->model = new ClienteModel();
         $this->view = new ClienteView();
+        $this->modelProducto= new ProductoModel();
 
          // barrera de seguridad
          $this->authHelper = new AuthHelper();
@@ -44,6 +47,7 @@ class ClienteController {
     
     
     public function editarInfoCliente($id){ 
+        session_start();
         $cliente= $this->model->getCliente($id);
         $this->view->editarCliente($cliente);        
     }
@@ -69,8 +73,17 @@ class ClienteController {
     }
 
     public function deleteCliente($id) {
-        $this->model->deleteClienteById($id);
-        header("Location: " . BASE_URL . 'list');
+        session_start();
+        $cantidad= $this->modelProducto->getProductos($id);
+        if($cantidad == 0){
+            $this->model->deleteClienteById($id);
+            header("Location: " . BASE_URL . 'list');
+        }
+        else {
+            $this->view->deleteCliente($id);
+        }
+
+        
     }
 
 }
