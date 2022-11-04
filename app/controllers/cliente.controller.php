@@ -75,7 +75,7 @@ class ClienteController {
     public function deleteCliente($id) {
         session_start();
         $cantidad= $this->modelProducto->getProductos($id);
-        if($cantidad == 0){
+        if(count($cantidad) == 0){
             $this->model->deleteClienteById($id);
             header("Location: " . BASE_URL . 'list');
         }
