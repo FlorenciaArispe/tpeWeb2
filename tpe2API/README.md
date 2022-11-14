@@ -2,19 +2,19 @@
 - Para su funcionamiento importar la BASE DE DATOS: database/db_showroom.php
 - Para usarla en postman http://localhost/web2/tpe2API/api/cliente
 - Ejemplos de uso:
-[GET] .../api/cliente (accede a un listado de todos los clientes)
-[GET] .../api/cliente/2 (accede al cliente con id 2)
-[POST] .../api/cliente (lee el contenido del body y agrega un nuevo cliente)
-[PUT] .../api/cliente/5 (lee el contenido del body y edita los datos del cliente seleccionado)
-[DELETE] .../api/cliente/7 (borra al cliente con el id 7)
+    - [GET] .../api/cliente (accede a un listado de todos los clientes)
+    - [GET] .../api/cliente/2 (accede al cliente con id 2)
+    - [POST] .../api/cliente (lee el contenido del body y agrega un nuevo cliente)
+    - [PUT] .../api/cliente/5 (lee el contenido del body y edita los datos del cliente seleccionado)
+    - [DELETE] .../api/cliente/7 (borra al cliente con el id 7)
 
 - Para hacer un POST o un PUT se deben ingresar los datos con el siguiente formato:
-{
-    "nombre": "Arispe",
-    "apellido": "Florencia",
-    "dni": "38824535",
-    "email": "florenciaarispe98@gmail.com"
-}
+    - {
+            "nombre": "Arispe",
+            "apellido": "Florencia",
+            "dni": "38824535",
+            "email": "florenciaarispe98@gmail.com"
+    }
 
 - Otras herramientas:
     - Ascendentemente: .../api/cliente?sort=nombre&order=asc (Ordena los nombres ascendentemente)

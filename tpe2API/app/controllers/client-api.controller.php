@@ -21,6 +21,8 @@ class ClientApiController {
     }
   
     public function getClients($params = null) {
+        $column= ['id', 'nombre' , 'apellido', 'dni' , 'email'];
+
         //FILTRO
         if ( isset($_GET['filtername']) ){        
             $filterName= mb_strtolower($_GET['filtername']);               
@@ -30,7 +32,9 @@ class ClientApiController {
         }
 
         //ORDERNAR       
-        if (isset($_GET['sort']) && (isset($_GET['order']))){
+        if ((isset($_GET['sort']) && isset($_GET['order']) && 
+        (isset($_GET['order']) =='asc' || isset($_GET['order']) =='desc') && 
+        (in_array(isset($_GET['sort']), $column))) ) {
             $sort= $_GET['sort'];
             $order= $_GET['order'];
         }
@@ -51,7 +55,11 @@ class ClientApiController {
         }
 
         $result= $this->model->getAll($filterName, $offset, $limit, $order, $sort);
-        $this->view->response($result);
+
+        if($result)
+            return $this->view->response($result, 200);
+        else
+            $this->view->response("No existen resultados", 404);
     }
 
     public function getClient($params = null) {
@@ -86,7 +94,7 @@ class ClientApiController {
         else{
             $id = $this->model->insert($client->nombre, $client->apellido, $client->dni, $client->email);
             $client = $this->model->get($id);
-            $this->view->response($client, 201);
+            $this->view->response("El cliente fue creado con exito", 201);
         }
     }
 
